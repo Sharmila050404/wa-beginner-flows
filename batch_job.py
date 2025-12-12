@@ -10,13 +10,10 @@ def transform(data):
 
 @task
 def load(data):
-    print(f"Loading: {data}")
+    return f"{data}"  # logs will NOT appear in Prefect Cloud
 
 @flow
-def etl_flow():
+def etl_flow(job_name: str = "Default Job"):
     raw = extract()
     processed = transform(raw)
-    load(processed)
-
-if __name__ == "__main__":
-    etl_flow()
+    load(f"{job_name}: {processed}")
