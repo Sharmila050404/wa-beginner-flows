@@ -9,6 +9,10 @@ def transform(data):
     return f"{data} → Transformed"
 
 @task
+def validate(data):
+    return f"{data} → Validated"
+
+@task
 def load(data):
     return f"{data}"  # Logs will not show in Cloud
 
@@ -16,6 +20,9 @@ def load(data):
 def etl_flow(job_name: str = "Daily ETL"):
     raw = extract()
     processed = transform(raw)
+    validated = validate(processed)
+    load(validated)
+
     load(f"{job_name}: {processed}")
 
 @flow
