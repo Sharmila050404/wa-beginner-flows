@@ -10,7 +10,7 @@ def transform(data):
 
 @task
 def load(data):
-    return f"{data}"  # logs will NOT appear in Prefect Cloud
+    raise Exception("Simulated failure")  # logs will NOT appear in Prefect Cloud
 
 @flow
 def etl_flow(job_name: str = "Default Job"):
