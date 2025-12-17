@@ -6,11 +6,13 @@ def extract():
 
 @task
 def transform(data):
+    import time
+    time.sleep(300)
     return f"{data} → Transformed"
 
 @task
 def load(data):
-    raise Exception("Simulated failure")  # logs will NOT appear in Prefect Cloud
+    return f"{data}"  # logs will NOT appear in Prefect Cloud
 
 @flow
 def etl_flow(job_name: str = "Default Job"):
