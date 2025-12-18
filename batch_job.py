@@ -6,8 +6,6 @@ def extract():
 
 @task
 def transform(data):
-    import time
-    time.sleep(300)
     return f"{data} → Transformed"
 
 @task
