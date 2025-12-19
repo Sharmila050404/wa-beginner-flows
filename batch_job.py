@@ -15,7 +15,7 @@ def transform(data):
         raise Exception("Random simulated failure")
     return f"{data} → Transformed"
 
-@task
+"""@task
 def load(data):
     return f"{data}"  # logs will NOT appear in Prefect Cloud
 
@@ -24,3 +24,13 @@ def etl_flow(job_name: str = "Default Job"):
     raw = extract()
     processed = transform(raw)
     load(f"{job_name}: {processed}")
+"""
+@flow
+def etl_flow(file_name: str = "default_file.csv"):
+    raw = extract()
+    processed = transform(raw)
+    load(processed, file_name)
+
+@task
+def load(data, file_name):
+    print(f"Loading: {data} into {file_name}")
