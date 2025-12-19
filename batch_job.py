@@ -4,8 +4,15 @@ from prefect import flow, task
 def extract():
     return "Data Extracted"
 
-@task
+#@task
+#def transform(data):
+#   return f"{data} → Transformed"
+
+@task(retries=3, retry_delay_seconds=30)
 def transform(data):
+    import random
+    if random.choice([True, False]):
+        raise Exception("Random simulated failure")
     return f"{data} → Transformed"
 
 @task
